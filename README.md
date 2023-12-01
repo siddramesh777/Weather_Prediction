@@ -1,7 +1,7 @@
 # Weather_Prediction
 Group_6 Weather Prediction project
 
-to run:
+execution steps using make file:
 
 make input
 ./input arg1 arg2 arg3 
