@@ -25,7 +25,7 @@ int main(int argc,char *argv[]) {
 	}
 	
 	//attaching the structure to shared memory 
-        struct WeatherData *shared_data = shmat(shmid, NULL, 0);
+        WeatherData *shared_data = shmat(shmid, NULL, 0);
 
 	//storing the user input in the shared memory
     	shared_data->temperature = atof(argv[1]);
