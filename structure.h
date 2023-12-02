@@ -1,7 +1,7 @@
 
 // Structure for storing temperature, humidity, and wind data
-struct WeatherData {
+typedef struct Inputdata {
     float temperature;
     float humidity;
     float wind;
-};
+}WeatherData;
