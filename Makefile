@@ -3,18 +3,16 @@ input:
 	gcc DataInput.c -g -o input
 
 all:
-	gcc Semaphore.c -g -o sem
-	gcc Weatherforecast.c -g -o pred
-	gcc sender.c -g -o send
-	gcc receiver.c -g -o recv
+	gcc Semaphore.c -g -o cli
+	gcc server.c -g -o ser
 	./sem
 	./pred
 	
 client:
-	./send
+	./cli
 
 server:
-	./recv
+	./ser
 
 clean:
 	rm input sem pred recv send *.txt
