@@ -15,7 +15,7 @@ int main(int argc,char *argv[]) {
     }
     else{
     
-        size_t size = sizeof(struct WeatherData);
+        size_t size = sizeof(WeatherData);
 	//shared memory creation
         int shmid = shmget((key_t)2000, size, IPC_CREAT | 0666);
         
