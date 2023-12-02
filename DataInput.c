@@ -11,7 +11,8 @@ int main(int argc,char *argv[]) {
 
     //checking the count of the command line arguments	
     if(argc!=4){
-    	error_handler("Incorrect arguments count !! Enter temperature humidity and wind data\n");
+    	fprintf(stderr,"Incorrect arguments count !! Enter temperature humidity and wind data\n");
+	    exit(1);
     }
     else{
     
