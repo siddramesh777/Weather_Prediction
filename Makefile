@@ -17,5 +17,5 @@ server:
 	./ser
 
 clean:
-	rm input sem pred recv send *.txt
+	rm input sem pred cli ser *.txt
 	
