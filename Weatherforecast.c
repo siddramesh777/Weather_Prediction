@@ -6,8 +6,6 @@
 #include <sys/shm.h>
 #include "structure.h"//structure declaration
 
-//to store the unicode symbols
-static char img[100];
 
 //function declarations
 void writeToFile(struct WeatherData *data);
@@ -58,27 +56,28 @@ int main() {
     return 0;
 }
 
+
 //error handler function
 void error_handler(char* message){
 	perror(message);
 	exit(EXIT_FAILURE);
 }
+
 	
 //weather Prediction Function	
 char* makePrediction(struct WeatherData *data) {
     
-    static char mpred[100];
+     static char mpred[100];
     
     //data comparision 
     if ((data->temperature > 25.0 && data->temperature <=50.0) &&  data->humidity >0.0 && data->humidity <60.0 ) {
     	if(data->wind >0.0 && data->wind < 8.0){
 		printf("Prediction: Sunny\n");
-		strcpy(mpred,"Sunny");
-		strcpy(img,"\u2600");//storing unicode
+		strcpy(mpred,"Sunny \u2600");//prediction with unicode
+		
         }else if(data->wind >=8.00){
         	printf("Prediction: Sunny and Windy\n");
-		strcpy(mpred,"Sunny and Windy");
-		strcpy(img,"\u2600 \U0001F32A");//storing unicode
+		strcpy(mpred,"Sunny and Windy \u2600 \U0001F32A");//prediction with unicode	
 	}
 	else{
     	printf("!! Prediction Failed !!\n");
@@ -88,12 +87,11 @@ char* makePrediction(struct WeatherData *data) {
     else if ((data->temperature > 15.0 && data->temperature <=25.0 )&&  data->humidity >0.0 && data->humidity <60.0  ) {
        if(data->wind >0.0 && data->wind < 15.0){
 		printf("Prediction: Rainy\n");
-        	 strcpy(mpred,"Rainy");
-        	 strcpy(img,"\u2614");//storing unicode
+        	strcpy(mpred,"Rainy \u2614");//storing unicode with prediction
+        	
         }else if(data->wind >=15.0){
         	printf("Prediction: Rainy and chance of storm\n");
-       	         strcpy(mpred,"Rainy and chance of storm ");
-       	         strcpy(img,"\u2614 \u2601\u26A1");//storing unicode
+       	         strcpy(mpred,"Rainy and chance of storm \u2614 \u2601\u26A1");//storing unicode
 	}
 	else{
     	printf("!! Prediction Failed !!\n");
@@ -104,12 +102,12 @@ char* makePrediction(struct WeatherData *data) {
     else if((data->temperature > 15.0 && data->temperature <=25.0 ) && data->humidity >0.0 && data->humidity <60.0 ){
     	if(data->wind >0.0 && data->wind < 15.0){
 		printf("Prediction: Cloudy\n");
-       		 strcpy(mpred,"Cloudy");
-       		 strcpy(img,"\u2601");//storing unicode
+       		 strcpy(mpred,"Cloudy \u2601"); //storing unicode with prediction
+       		 
         }else if(data->wind >=15.0){
         	printf("Prediction: Cloudy and Windy\n");
-       		 strcpy(mpred,"Cloudy and Windy");
-       		 strcpy(img,"\u2601 \U0001F32A");//storing unicode
+       		 strcpy(mpred,"Cloudy and Windy \u2601 \U0001F32A"); //storing unicode with prediction
+    
 	} 
 	else{
     	printf("!! Prediction Failed !!\n");
@@ -119,12 +117,11 @@ char* makePrediction(struct WeatherData *data) {
      else if((data->temperature > 0.0 && data->temperature <= 15.0) &&  data->humidity >0.0 && data->humidity <60.0  ){
     	if(data->wind >0.0 && data->wind < 15.0){
 		printf("Prediction: Winter\n");
-       		 strcpy(mpred,"Winter");
-       		 strcpy(img,"\u2744");//storing unicode
+       		 strcpy(mpred,"Winter \u2744");//storing unicode with prediction
+       	
         }else if(data->wind >=15.0){
         	printf("Prediction: Winter and Windy\n");
-       		 strcpy(mpred,"Winter and Windy");
-       		 strcpy(img,"\u2744\U0001F32A");//storing unicode
+       		 strcpy(mpred,"Winter and Windy \u2744\U0001F32A"); //storing prediction with unicode
 	} 
 	 else{
     	printf("!! Prediction Failed !!\n");
@@ -155,7 +152,5 @@ void writeToFile(struct WeatherData *data) {
     fprintf(file, "Humidity: %.2f\n", data->humidity);
     fprintf(file, "Wind: %.2f\n", data->wind);
     fprintf(file, "Weather Prediction : %s",prediction);
-    fprintf(file, ": %s\n",img);
     fclose(file);
 }
-
