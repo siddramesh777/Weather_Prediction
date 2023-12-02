@@ -31,7 +31,7 @@ int main() {
         error_handler("error shared memory\n");
     }
 
-    struct WeatherData *shared_data = shmat(shmid, NULL, 0);
+    WeatherData *shared_data = shmat(shmid, NULL, 0);
     
 	if(semaphore == NULL)//SEM_FAILED == NULL
 	{
