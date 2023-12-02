@@ -9,8 +9,8 @@
 static char prediction[100];
 
 //function declarations
-void writeToFile(struct WeatherData *data);
-void makePrediction(struct WeatherData *data);
+void writeToFile(WeatherData *data);
+void makePrediction(WeatherData *data);
 void error_handler(char* message);
 
 int main() {
@@ -21,7 +21,7 @@ int main() {
     sem_t * semaphore;
     semaphore = sem_open("/semaph",O_RDWR);
 	
-    size_t size = sizeof(struct WeatherData);
+    size_t size = sizeof(WeatherData);
     
     //shared memory access
     int shmid = shmget((key_t)2000, size, 0666);
@@ -66,7 +66,7 @@ void error_handler(char* message){
 
 	
 //weather Prediction Function	
-void makePrediction(struct WeatherData *data) {
+void makePrediction(WeatherData *data) {
 
     //data comparision 
     if ((data->temperature > 25.0 && data->temperature <=50.0) &&  data->humidity >0.0 && data->humidity <60.0 ) {
@@ -135,7 +135,7 @@ void makePrediction(struct WeatherData *data) {
 }
 
 //Function to write data to file
-void writeToFile(struct WeatherData *data) {
+void writeToFile(WeatherData *data) {
     
     //creating file in append mode
     FILE *file = fopen("data.txt", "a");
