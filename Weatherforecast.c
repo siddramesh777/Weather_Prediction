@@ -150,6 +150,6 @@ void writeToFile(WeatherData *data) {
     fprintf(file, "Temperature: %.2f\n", data->temperature);
     fprintf(file, "Humidity: %.2f\n", data->humidity);
     fprintf(file, "Wind: %.2f\n", data->wind);
-    fprintf(file, "Weather Prediction : %s",prediction);
+    fprintf(file, "Weather Prediction : %s\n",prediction);
     fclose(file);
 }
