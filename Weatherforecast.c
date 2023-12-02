@@ -6,10 +6,11 @@
 #include <sys/shm.h>
 #include "structure.h"//structure declaration
 
+static char prediction[100];
 
 //function declarations
 void writeToFile(struct WeatherData *data);
-char* makePrediction(struct WeatherData *data);
+void makePrediction(struct WeatherData *data);
 void error_handler(char* message);
 
 int main() {
@@ -65,74 +66,72 @@ void error_handler(char* message){
 
 	
 //weather Prediction Function	
-char* makePrediction(struct WeatherData *data) {
-    
-     static char mpred[100];
-    
+void makePrediction(struct WeatherData *data) {
+
     //data comparision 
     if ((data->temperature > 25.0 && data->temperature <=50.0) &&  data->humidity >0.0 && data->humidity <60.0 ) {
     	if(data->wind >0.0 && data->wind < 8.0){
 		printf("Prediction: Sunny\n");
-		strcpy(mpred,"Sunny \u2600");//prediction with unicode
+		strcpy(prediction,"Sunny \u2600");//prediction with unicode
 		
         }else if(data->wind >=8.00){
         	printf("Prediction: Sunny and Windy\n");
-		strcpy(mpred,"Sunny and Windy \u2600 \U0001F32A");//prediction with unicode	
+		strcpy(prediction,"Sunny and Windy \u2600 \U0001F32A");//prediction with unicode	
 	}
 	else{
     	printf("!! Prediction Failed !!\n");
-    	strcpy(mpred,"!! Prediction Failed !!");
+    	strcpy(prediction,"!! Prediction Failed !!");
    	 }
     } 
     else if ((data->temperature > 15.0 && data->temperature <=25.0 )&&  data->humidity >0.0 && data->humidity <60.0  ) {
        if(data->wind >0.0 && data->wind < 15.0){
 		printf("Prediction: Rainy\n");
-        	strcpy(mpred,"Rainy \u2614");//storing unicode with prediction
+        	strcpy(prediction,"Rainy \u2614");//storing unicode with prediction
         	
         }else if(data->wind >=15.0){
         	printf("Prediction: Rainy and chance of storm\n");
-       	         strcpy(mpred,"Rainy and chance of storm \u2614 \u2601\u26A1");//storing unicode
+       	         strcpy(prediction,"Rainy and chance of storm \u2614 \u2601\u26A1");//storing unicode
 	}
 	else{
     	printf("!! Prediction Failed !!\n");
-    	strcpy(mpred,"!! Prediction Failed !!");
+    	strcpy(prediction,"!! Prediction Failed !!");
    	 }
 	   
     } 
     else if((data->temperature > 15.0 && data->temperature <=25.0 ) && data->humidity >0.0 && data->humidity <60.0 ){
     	if(data->wind >0.0 && data->wind < 15.0){
 		printf("Prediction: Cloudy\n");
-       		 strcpy(mpred,"Cloudy \u2601"); //storing unicode with prediction
+       		 strcpy(prediction,"Cloudy \u2601"); //storing unicode with prediction
        		 
         }else if(data->wind >=15.0){
         	printf("Prediction: Cloudy and Windy\n");
-       		 strcpy(mpred,"Cloudy and Windy \u2601 \U0001F32A"); //storing unicode with prediction
+       		 strcpy(prediction,"Cloudy and Windy \u2601 \U0001F32A"); //storing unicode with prediction
     
 	} 
 	else{
     	printf("!! Prediction Failed !!\n");
-    	strcpy(mpred,"!! Prediction Failed !!");
+    	strcpy(prediction,"!! Prediction Failed !!");
    	 }
     }
      else if((data->temperature > 0.0 && data->temperature <= 15.0) &&  data->humidity >0.0 && data->humidity <60.0  ){
     	if(data->wind >0.0 && data->wind < 15.0){
 		printf("Prediction: Winter\n");
-       		 strcpy(mpred,"Winter \u2744");//storing unicode with prediction
+       		 strcpy(prediction,"Winter \u2744");//storing unicode with prediction
        	
         }else if(data->wind >=15.0){
         	printf("Prediction: Winter and Windy\n");
-       		 strcpy(mpred,"Winter and Windy \u2744\U0001F32A"); //storing prediction with unicode
+       		 strcpy(prediction,"Winter and Windy \u2744\U0001F32A"); //storing prediction with unicode
 	} 
 	 else{
     	printf("!! Prediction Failed !!\n");
-    	strcpy(mpred,"!! Prediction Failed !!");
+    	strcpy(prediction,"!! Prediction Failed !!");
    	 }
     }
     else{
     	printf("!! Prediction Failed !!\n");
-    	strcpy(mpred,"!! Prediction Failed !!");
+    	strcpy(prediction,"!! Prediction Failed !!");
     }
-    return mpred;
+  
 }
 
 //Function to write data to file
@@ -144,7 +143,7 @@ void writeToFile(struct WeatherData *data) {
         error_handler("file open failure");
     }
   
-    char *prediction = makePrediction(data);
+    makePrediction(data);
     
     //writing data to file
     fprintf(file, "Timestamp: %s %s\n", __TIME__,__DATE__);
